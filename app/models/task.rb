@@ -6,6 +6,8 @@ class Task < ApplicationRecord
 
   belongs_to :user
 
+  scope :recent, -> { order(created_at: :desc) } #[知見] 4-8
+
   private
 
   def validate_name_not_including_comma
