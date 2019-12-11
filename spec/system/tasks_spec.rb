@@ -13,14 +13,14 @@ describe 'タスク管理機能', type: :system do
       before do
         # ユーザーAでログインする
         visit login_path
-        fillin 'メールアドレス', with: 'a@example.com'
-        fillin 'パスワード', with: 'password'
+        fill_in 'メールアドレス', with: 'a@example.com'
+        fill_in 'パスワード', with: 'password'
         click_button 'ログインする'
       end
 
       it 'ユーザーAの作成したタスクが表示される' do
         # 作成済みのタスクの名称が画面上に表示されていることを確認
-        except(page).to have_content '最初のタスク'
+        expect(page).to have_content '最初のタスク'
       end
     end
   end
