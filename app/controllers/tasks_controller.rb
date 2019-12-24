@@ -4,6 +4,11 @@ class TasksController < ApplicationController
   def index
     @q = current_user.tasks.ransack(params[:q])
     @tasks = @q.result(distinct: true)
+
+    respond_to do |format| #respond_to: リクエストで指定されたフォーマット（HTML,JSON,XML）に合わせて結果を返すメソッド
+      format.html
+      format.csv { send_data @tasks.generate_csv, filename: "tasks-#{Time.zone.now.strftime('%Y%m%d%S')}.csv" }
+    end
   end
 
   def show
